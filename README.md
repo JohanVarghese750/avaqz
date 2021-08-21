@@ -14,3 +14,40 @@ Thus born avaqz!!
 
 ## Apologies
 Im really sorry on not including the code for avaqz, because this has been adopted as the official tool by the QA team! so the code resideds on the org premise with some sensitive data but its my duty to help anyone who faces issue while developing a similar application, and hey this also gives you the freedom to use the language of your preference while creating a similar application
+
+#### Jira API documentation : https://developer.atlassian.com/server/jira/platform/rest-apis/
+
+API for creating an issue(POST)  : http://localhost:8080/jira/rest/api/2/issue/
+Sample Payload  from documentation:
+{
+    "fields": {
+       "project":
+       {
+          "id": "10000"
+       },
+       "summary": "No REST for the Wicked.",
+       "description": "Creating of an issue using ids for projects and issue types using the REST API",
+       "issuetype": {
+          "id": "3"
+       }
+   }
+}
+------------------------------------------------------------------------------------------------------------------
+API for updating an issue(PUT)  : http://localhost:8080/jira/rest/api/2/issue/
+Sample Payload  from documentation:
+{
+    "fields": {
+       "project":
+       {
+          "id": "10000"
+       },
+       "summary": "No REST for the Wicked.",
+       "description": "Creating of an issue using ids for projects and issue types using the REST API",
+       "issuetype": {
+          "id": "3"
+       }
+   }
+}
+
+
+citation : The above API and its payload samples are from the very detailed Jira documentation. Please check it out for more info!
