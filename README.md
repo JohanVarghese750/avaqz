@@ -12,5 +12,5 @@ For the ease of use among other team members passing the script as such was not 
 
 Thus born avaqz!!
 
-##Apologies
+## Apologies
 Im really sorry on not including the code for avaqz, because this has been adopted as the official tool by the QA team! so the code resideds on the org premise with some sensitive data but its my duty to help anyone who faces issue while developing a similar application, and hey this also gives you the freedom to use the language of your preference while creating a similar application
