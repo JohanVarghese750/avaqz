@@ -1,0 +1,36 @@
+Scripting language : Google Appscript
+Front end : HTML, CSS, Javascript
+
+Explanation
+-----------
+1) The user inputs the credentials and sheet info of the sheet containing the testcase in the input fields of the Appscript extended webapp. 
+2) The webapp passes the information to the appscript and the appscript fetches the testcase row by row from the google sheet passed by sheetname and calls the exposed Jira      API to create/update a Jira.
+3) The create API, if successful the Jira ID returns which is appended back to the sheet
+4) On any type of failure, an exception is raised and a user friendly exception is displayed on the UI(webapp)
+5) Any unexpected mail would trigger an automatic mail to the admins email
+6) If the user wants to update a Jira, the checkbox can be checked and the create button calls the exposed update Jira API
+7) Alternatively, if a user wants to check the the metrics, like how many test cases were automated, the Metrics button serves the pupose.
+
+Working :
+The user uses a Google spreadsheet to track the testcases and soon after the testcases are written the user can pass the Google spreadsheet URL, spreadsheet name along
+with the Jira credentials to the tool UI and on clicking the Create button, the information is passed to the Appscript and the Appscript reads the data inside the sheet and 
+calls the external Jira service with the user credentials(This is necessary and cannot be hardcoded because the ticket should be created in the users name).Encoding is done beforing passing the credentials to the backend so that it cannot be tracked back.
+
+Each column in Google spreadsheet is assigned to a field in Jira and the user is asked to follow this template. For ease of use, a template sheet is attached in the UI so that the user can directly copy and paste the field and start filling in the fields. Each row in the spreadsheet is a testcase and the column values would become the fields of Jira.
+Only necessary Jira fields were because the app was to be kept as simple and easy to use as possible.
+
+An iterator is used to go through each row in the spreadsheet and the Jira POST API for creating an issue is called passing the necessary fields as the payload.On successful 
+creation, a Jira ID is returned which is appeneded to the end of a url template to get the actual testcase URL and the URL is written back to the spreadsheet(To minimize multiple write hits, this can be done at the end at a single go after storing in an array).
+
+Testcase steps can also be included by calling the exposed zephyr APIs in the same iteration.You can either use split function or regex to split if there are more than one testecase in a single cell.
+
+Jira updation
+--------------
+An already existing Jira/Jiras can be also be updated using this tool. If the checkbox 'Update Jira' is checked, the Appscript alternatively calls the API to update an alternatively existing Jira.
+
+With additional information like if its a manual, automated, or automateable testcase the tool also shows an aggregated overview of what kind of testcases are present in the sheet.
+
+AWS 
+---
+The usage of AWS is optional and I used it as final steps of perfection. AWS was used to provide a friendly URL to the webapp as the automatically assigned deployment ID in appscript is a little too long.
+A piece of javascript redirect code with the original webapp URL was placed in an S3 folder and hosted using route 53,Cloudfront distribution and on hitting the friendly URL  it goes to S3 and redirects to the original webapp URL(A sweet redirect!)
