@@ -34,7 +34,8 @@ Sample Payload  from documentation:
        }
    }
 }
-------------------------------------------------------------------------------------------------------------------
+
+
 API for updating an issue(PUT)  : http://localhost:8080/jira/rest/api/2/issue/
 
 Sample Payload  from documentation:
